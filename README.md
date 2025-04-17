@@ -54,14 +54,14 @@ Grab the SynthraChat folder, which should include:
 
 SynthraCHAT.py (main app)
 
-Synthra_Installer.bat (auto-installer)
+Synthra_Install.bat (auto-installer)
 
 Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
 ✅ Keep all files in the same folder
 
 2️⃣ Run the Installer 🖱️
-Double-click Synthra_Installer.bat
+Double-click Synthra_Install.bat
 🔐 It will request admin rights—click Yes
 
 No need to “Run as Admin”—the script handles it for you.
