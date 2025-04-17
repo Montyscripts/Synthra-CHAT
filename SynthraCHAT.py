@@ -15,7 +15,7 @@ import threading
 import pygame
 import pyautogui
 import string
-import asyncio
+import sys, asyncio
 import base64
 import io
 import traceback
@@ -30,8 +30,8 @@ import customtkinter as ctk
 from tkinter import scrolledtext
 
 # SynthraChat imports and config
-import google.generativeai as genai
-from google.generativeai import types
+from google import genai
+from google.genai import types
 
 
 # Audio config
@@ -735,7 +735,10 @@ def toggle_synthra_chat():
         # Start SynthraCHAT
         try:
             # Initialize client and config
-            genai.configure(api_key=synthra_config['api_key'])
+            client = genai.Client(
+                http_options={"api_version": "v1alpha"},
+                api_key=synthra_config['api_key']
+            )
             
             CONFIG = types.LiveConnectConfig(
                 response_modalities=["audio"],
