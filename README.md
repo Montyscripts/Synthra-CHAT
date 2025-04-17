@@ -87,22 +87,21 @@ ________________________________________________________________________________
 
 💡 Using SynthraChat
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+⚙ Open the Settings Menu
+Click the ☰ for menu then select SynthraCHAT:
+
+Input mode: Camera, Screen, or Audio    
+
+Voice selection (8 AI voices!)
+
+Persona setup & API key
+
+Set visuals and sounds etc.
+
 🎙 Start Talking
 Click the main AI button to begin or stop the chat
 
 Speak naturally—your AI will respond in real time
-
-⚙ Open the Settings Menu
-Click the ☰ menu for:
-
-Voice selection (8 AI voices!)
-
-Input mode: Camera, Screen, or Audio
-
-Custom visuals and sounds
-
-API key & persona setup
-
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 🧑‍🎤 Customize Everything
