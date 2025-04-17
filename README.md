@@ -1,9 +1,10 @@
 🐍 Python Installation (If You Don’t Have Python)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 If your system moans about missing Python, here’s how to shut it up:
 
 ✅ Step 1: Download Python 3.10.0
 Go to the official Python download page
-Download the Windows installer for Python 3.10.0
+Download the Windows installer for Python 3.10.0 (this version is required for the script to work properly).
 
 ✅ Step 2: Install Python
 Run the installer
