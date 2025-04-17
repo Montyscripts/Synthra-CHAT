@@ -2,9 +2,9 @@
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 If your system moans about missing Python, here’s how to shut it up:
 
-✅ Step 1: Download Python 3.10.0
+✅ Step 1: Download Python 3.11.9
 Go to the official Python download page
-Download the Windows installer for Python 3.10.0 (this version is required for the script to work properly).
+Download the Windows installer for Python 3.11.9 (this version is required for the script to work properly).
 
 ✅ Step 2: Install Python
 Run the installer
@@ -125,7 +125,7 @@ ________________________________________________________________________________
 
 🧪 Tech Used
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Python 3.10
+Python 3.11.9
 
 tkinter, pyttsx3, pygame, cv2, mss, pyaudio
 
