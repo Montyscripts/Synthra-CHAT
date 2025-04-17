@@ -1,0 +1,10 @@
+google-generativeai
+customtkinter
+pyttsx3
+pygame
+pyautogui
+opencv-python
+pyaudio
+Pillow==9.5.0
+screeninfo
+mss
