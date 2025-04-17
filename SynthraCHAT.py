@@ -735,10 +735,7 @@ def toggle_synthra_chat():
         # Start SynthraCHAT
         try:
             # Initialize client and config
-            client = genai.Client(
-                http_options={"api_version": "v1alpha"},
-                api_key=synthra_config['api_key']
-            )
+            genai.configure(api_key=synthra_config['api_key'])
             
             CONFIG = types.LiveConnectConfig(
                 response_modalities=["audio"],
