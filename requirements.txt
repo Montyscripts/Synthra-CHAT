@@ -1,5 +1,4 @@
-pyinstaller
-google-generativeai>=0.3.1
+google-genai>=0.1.0
 customtkinter
 pyttsx3
 pygame
@@ -9,3 +8,4 @@ pyaudio
 Pillow==9.5.0
 screeninfo
 mss
+pyinstaller
