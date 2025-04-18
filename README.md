@@ -93,7 +93,7 @@ After installation, check the dist folder. You’ll find:
 ![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
 ✅ SynthraChat.exe
-🧠 Just double-click it and meet your AI assistant.
+🔮 Just double-click it and meet your AI assistant.
 
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -128,7 +128,7 @@ Want Synthra to sound like a Greek god or a noir detective? Change the voice + p
 
 ✨ Features
 🎤 Voice-Activated AI – Real-time natural convo
-🧠 Gemini Intelligence – Powered by Google’s LLM
+🔮 Gemini Intelligence – Powered by Google’s LLM
 📸 Camera / Screen / Audio Modes – Choose how Synthra sees
 🎭 8 Unique AI Voices – Change the vibe
 🎨 Visual & Audio Customization – Make it yours
