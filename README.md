@@ -65,9 +65,13 @@ Your AI Voice Companion—Anywhere, Anytime
 
 ✔ Keep all files in the same folder
 
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
 2️⃣ Locate the downloaded SynthraChat folder and move or extract it to your Desktop (or anywhere convenient — it doesn’t have to be fancy).
 
 ![step 2 (1)](https://github.com/user-attachments/assets/5becdd5d-bb65-47a8-8b61-ff5e26deb3e4)
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 3️⃣ Run the Installer 🖱️
 
@@ -84,6 +88,8 @@ Your AI Voice Companion—Anywhere, Anytime
 ✔ Bundle the app into SynthraChat.exe
 
 Might take a few minutes.🕰️ Breathe.🌬️ Vibe.🎶 Roll a joint if you're feelin' fancy.🌿🔥😌
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 4️⃣ Launch the App 🚀
 After installation, check the dist folder. You’ll find:
