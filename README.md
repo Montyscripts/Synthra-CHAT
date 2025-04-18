@@ -92,13 +92,14 @@ Might take a few minutes.🕰️ Breathe.🌬️ Vibe.🎶 Roll a joint if you'r
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 4️⃣ Launch the App 🚀
-After installation, check the dist folder. You’ll find:
+After installation, check the dist folder. You’ll find: 
+
+✔ SynthraChat.exe 🔮
 
 ![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
 ✅ All set Fire it up and let the stardust do its thing. 😉
 
-✔ SynthraChat.exe 🔮
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 💡 Using SynthraChat
