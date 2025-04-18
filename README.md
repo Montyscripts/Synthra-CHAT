@@ -67,9 +67,9 @@ Synthra_Install.bat (auto-installer)
 
 Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
-![step 2 (1)](https://github.com/user-attachments/assets/5becdd5d-bb65-47a8-8b61-ff5e26deb3e4)
-
 ✅ Keep all files in the same folder
+
+![step 2 (1)](https://github.com/user-attachments/assets/5becdd5d-bb65-47a8-8b61-ff5e26deb3e4)
 
 3️⃣ Run the Installer 🖱️
 
