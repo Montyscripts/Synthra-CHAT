@@ -1,17 +1,3 @@
-
-![Step 1](https://github.com/user-attachments/assets/16f9411d-b389-4881-8814-e8ba70779aaa)
-
-![step 2](https://github.com/user-attachments/assets/51d8f06e-8323-48ba-9daf-8689f74a5f5b)
-
-![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
-
-![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
-
-![step 5](https://github.com/user-attachments/assets/cb816982-7eb3-4654-a0f2-af040c374754)
-
-![step 6](https://github.com/user-attachments/assets/3dcaa4ea-8fb8-4b16-9b80-89181030c310)
-
-
 🐍 Python Installation (If You Don’t Have Python)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 If your system moans about missing Python, here’s how to shut it up:
@@ -55,6 +41,9 @@ Paste your API key into the “Google Gemini API Key” box
 
 Save the configuration
 
+![step 5](https://github.com/user-attachments/assets/cb816982-7eb3-4654-a0f2-af040c374754)
+
+
 🔒 No key, no magic. The API key is what lets your AI think and speak.
 
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
@@ -74,11 +63,13 @@ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
 ✅ Keep all files in the same folder
 
+![Step 1](https://github.com/user-attachments/assets/16f9411d-b389-4881-8814-e8ba70779aaa)
+
 2️⃣ Run the Installer 🖱️
 Double-click Synthra_Install.bat
 🔐 It will request admin rights—click Yes
 
-No need to “Run as Admin”—the script handles it for you.
+![step 2](https://github.com/user-attachments/assets/51d8f06e-8323-48ba-9daf-8689f74a5f5b)
 
 3️⃣ Chill While It Installs ☕
 The installer will:
@@ -91,11 +82,15 @@ The installer will:
 
 Might take a few minutes. Breathe. Vibe. Roll a joint if you're feelin' fancy.
 
+![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
+
 4️⃣ Launch the App 🚀
 After installation, check the dist folder. You’ll find:
 
 ✅ SynthraChat.exe
 🧠 Just double-click it and meet your AI assistant.
+
+![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -116,6 +111,8 @@ Set visuals and sounds etc.
 Click the main AI button to begin or stop the chat
 
 Speak naturally—your AI will respond in real time
+
+![step 6](https://github.com/user-attachments/assets/3dcaa4ea-8fb8-4b16-9b80-89181030c310)
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 🧑‍🎤 Customize Everything
