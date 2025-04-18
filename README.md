@@ -23,7 +23,7 @@ ________________________________________________________________________________
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SynthraChat uses Google’s Gemini AI to talk to you—so you’ll need an API key. Don’t worry, it’s free and easy:
 
-![Gemini fixed (2)](https://github.com/user-attachments/assets/249bd95e-93f8-4ae9-bfad-0fa274537e94)
+https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3hiNjNua2R4Njd0a2E0emQzNmVpbm1rMG1ncG14cnY1Y2FhcG82ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Md7uRcYnoW4ULVtQGa/giphy.gif
 
 ✅ Step 1: Go to Gemini API Page
 Head to: https://makersuite.google.com/app/apikey
