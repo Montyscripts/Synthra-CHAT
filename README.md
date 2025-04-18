@@ -98,11 +98,7 @@ ________________________________________________________________________________
 💡 Using SynthraChat
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-![step 6 (1)](https://github.com/user-attachments/assets/8ec8e498-d890-466e-b997-3ae417e78efb)
-
-
-https://github.com/user-attachments/assets/e0fee5d2-ede8-4309-9e2e-777d9e8a4e36
-
+https://github.com/user-attachments/assets/924622e7-48af-4704-ae6d-d77d2a11ed37
 
 ⚙ Open the Settings Menu
 Click the ☰ for menu then select SynthraCHAT:
