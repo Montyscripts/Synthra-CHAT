@@ -1,3 +1,6 @@
+![Image](https://github.com/user-attachments/assets/e63dd41e-843c-4534-8c36-e35f4c19b46e)
+
+
 🐍 Python Installation (If You Don’t Have Python)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 If your system moans about missing Python, here’s how to shut it up:
