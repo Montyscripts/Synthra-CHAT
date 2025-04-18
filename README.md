@@ -1,3 +1,17 @@
+
+![Step 1](https://github.com/user-attachments/assets/16f9411d-b389-4881-8814-e8ba70779aaa)
+
+![step 2](https://github.com/user-attachments/assets/51d8f06e-8323-48ba-9daf-8689f74a5f5b)
+
+![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
+
+![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
+
+![step 5](https://github.com/user-attachments/assets/cb816982-7eb3-4654-a0f2-af040c374754)
+
+![step 6](https://github.com/user-attachments/assets/3dcaa4ea-8fb8-4b16-9b80-89181030c310)
+
+
 🐍 Python Installation (If You Don’t Have Python)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 If your system moans about missing Python, here’s how to shut it up:
