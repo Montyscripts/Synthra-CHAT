@@ -85,7 +85,7 @@ Double-click Synthra_Install.bat
 
 ![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
 
-Might take a few minutes. Breathe. Vibe. Roll a joint if you're feelin' fancy.
+Might take a few minutes.🕰️ Breathe.🌬️ Vibe.🎶 Roll a joint if you're feelin' fancy.🌿🔥😌
 
 4️⃣ Launch the App 🚀
 After installation, check the dist folder. You’ll find:
