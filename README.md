@@ -25,7 +25,9 @@ SynthraChat uses Google’s Gemini AI to talk to you—so you’ll need an API k
 
 ![Gemini fixed (2)](https://github.com/user-attachments/assets/249bd95e-93f8-4ae9-bfad-0fa274537e94)
 
-⬆️ View this GIF on your mobile device ⬇️ https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3hiNjNua2R4Njd0a2E0emQzNmVpbm1rMG1ncG14cnY1Y2FhcG82ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Md7uRcYnoW4ULVtQGa/giphy.gif
+⬆️ View this GIF on your mobile device ⬇️
+
+https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3hiNjNua2R4Njd0a2E0emQzNmVpbm1rMG1ncG14cnY1Y2FhcG82ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Md7uRcYnoW4ULVtQGa/giphy.gif
 
 ✅ Step 1: Go to Gemini API Page
 Head to: https://makersuite.google.com/app/apikey
@@ -58,6 +60,7 @@ Your AI Voice Companion—Anywhere, Anytime
 ![Step 1](https://github.com/user-attachments/assets/16f9411d-b389-4881-8814-e8ba70779aaa) 
 
 ⬆️ View this GIF on your mobile device ⬇️
+
 https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3llcno5M3o2c3I1djhvMmZsMGY5bm56ZDBuN2UzbW01NG9ienp2aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Osc936b6JLSt2FYG85/giphy.gif
 
 ✅ Folder should include:
@@ -77,6 +80,7 @@ ________________________________________________________________________________
 ![step 2 (1)](https://github.com/user-attachments/assets/5becdd5d-bb65-47a8-8b61-ff5e26deb3e4)
 
 ⬆️ View this GIF on your mobile device ⬇️
+
 https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3d0Mnl4cjhhc2xibW5sOWlsN2pxeHhhYjBlcWhxOTdlcTNsdjRzaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/It69QlpX59drqd0pOz/giphy.gif
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -85,6 +89,7 @@ ________________________________________________________________________________
 ![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
 
 ⬆️ View this GIF on your mobile device ⬇️
+
 https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExemswbTZ4c3dpMHBqZW1mbnhkZHZ0ZXJmb2F1aWdjODY0czhpbzdhdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jVxnOyAJfPxX4Dxm7i/giphy.gif
 
 ✅ Double-click Synthra_Install.bat
@@ -107,6 +112,7 @@ After installation, check the dist folder for SynthraChat.exe
 ![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
 ⬆️ View this GIF on your mobile device ⬇️
+
 https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3BsZW9pbWFzbHk4YmR4dTc1c21lemdtbGJqZHB3bnpncDlrY2dzciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0PiSX3TryVYNmOSu98/giphy.gif
 
 ✅ All set. Fire it up and let the stardust do its thing. 😉 You’re not just chatting—you’re conjuring.
