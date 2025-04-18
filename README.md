@@ -57,7 +57,7 @@ Your AI Voice Companion—Anywhere, Anytime
 
 ![Step 1](https://github.com/user-attachments/assets/16f9411d-b389-4881-8814-e8ba70779aaa) 
 
-Locate the downloaded SynthraChat folder and move or extract it to your Desktop (or anywhere convenient — it doesn’t have to be fancy).
+2️⃣ Locate the downloaded SynthraChat folder and move or extract it to your Desktop (or anywhere convenient — it doesn’t have to be fancy).
 
 Folder should include:
 
@@ -71,7 +71,7 @@ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
 ✅ Keep all files in the same folder
 
-2️⃣ Run the Installer 🖱️
+3️⃣ Run the Installer 🖱️
 Double-click Synthra_Install.bat
 🔐 It will request admin rights—click Yes if not right-click and run as admin - Chill While It Installs ☕ The installer will:
 
