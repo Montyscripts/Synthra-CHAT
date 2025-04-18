@@ -35,7 +35,7 @@ Use your Google account to log in. You’ll be shown your Gemini API key (a long
 Click the little copy icon 📋 next to the key.
 
 ✅ Step 4: Add It to SynthraChat
-When you run SynthraChat:
+When you run SynthraChat after Installation Guide:
 
 Click ☰ > SynthraCHAT
 
