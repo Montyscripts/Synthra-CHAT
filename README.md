@@ -61,13 +61,13 @@ Your AI Voice Companion—Anywhere, Anytime
 
 ✅ Folder should include:
 
-✅ SynthraCHAT.py (main app)
+✔ SynthraCHAT.py (main app)
 
-✅ Synthra_Install.bat (auto-installer)
+✔ Synthra_Install.bat (auto-installer)
 
-✅ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
+✔ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
-✅ Keep all files in the same folder
+✔ Keep all files in the same folder
 
 3️⃣ Run the Installer 🖱️
 
@@ -75,7 +75,7 @@ Your AI Voice Companion—Anywhere, Anytime
 
 ✅ Double-click Synthra_Install.bat
 
-✅ 🔐 It’ll ask for admin permission — click Yes, or right-click and select “Run as administrator” if it doesn’t prompt you.
+🔐 It’ll ask for admin permission — click Yes, or right-click and select “Run as administrator” if it doesn’t prompt you.
 
 ✔ Check if Python is installed
 
@@ -90,7 +90,7 @@ After installation, check the dist folder. You’ll find:
 
 ![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
-✅ SynthraChat.exe
+✔  SynthraChat.exe
 🔮 Just double-click it and meet your AI assistant.
 
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
