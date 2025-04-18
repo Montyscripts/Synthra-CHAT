@@ -96,8 +96,9 @@ After installation, check the dist folder. You’ll find:
 
 ![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
-✔  SynthraChat.exe
-🔮 Just double-click it and meet your AI assistant.
+✔ SynthraChat.exe 🔮
+
+All set Fire it up and let the stardust do its thing. 😉
 
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
