@@ -41,7 +41,8 @@ Paste your API key into the “Google Gemini API Key” box
 
 Save the configuration
 
-![step 5](https://github.com/user-attachments/assets/cb816982-7eb3-4654-a0f2-af040c374754)
+
+![Gemini fixed (2)](https://github.com/user-attachments/assets/249bd95e-93f8-4ae9-bfad-0fa274537e94)
 
 
 🔒 No key, no magic. The API key is what lets your AI think and speak.
