@@ -73,10 +73,7 @@ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
 2️⃣ Run the Installer 🖱️
 Double-click Synthra_Install.bat
-🔐 It will request admin rights—click Yes if not right-click and run as admin
-
-3️⃣ Chill While It Installs ☕
-The installer will:
+🔐 It will request admin rights—click Yes if not right-click and run as admin - Chill While It Installs ☕ The installer will:
 
 ✔ Check if Python is installed
 
