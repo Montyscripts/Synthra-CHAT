@@ -75,8 +75,6 @@ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 Double-click Synthra_Install.bat
 🔐 It will request admin rights—click Yes if not right-click and run as admin
 
-![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
-
 3️⃣ Chill While It Installs ☕
 The installer will:
 
@@ -85,6 +83,8 @@ The installer will:
 ✔ Install all required packages
 
 ✔ Bundle the app into SynthraChat.exe
+
+![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
 
 Might take a few minutes. Breathe. Vibe. Roll a joint if you're feelin' fancy.
 
