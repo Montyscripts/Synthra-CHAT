@@ -73,9 +73,9 @@ Assets: Icon.png, Wallpaper.png, Button.mp3, etc.
 
 2️⃣ Run the Installer 🖱️
 Double-click Synthra_Install.bat
-🔐 It will request admin rights—click Yes
+🔐 It will request admin rights—click Yes if not right-click and run as admin
 
-
+![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
 
 3️⃣ Chill While It Installs ☕
 The installer will:
@@ -88,20 +88,21 @@ The installer will:
 
 Might take a few minutes. Breathe. Vibe. Roll a joint if you're feelin' fancy.
 
-![step 3 (1)](https://github.com/user-attachments/assets/de190aef-977d-4599-8f5c-421e83ee8a98)
-
 4️⃣ Launch the App 🚀
 After installation, check the dist folder. You’ll find:
 
+![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
+
 ✅ SynthraChat.exe
 🧠 Just double-click it and meet your AI assistant.
-
-![step 4](https://github.com/user-attachments/assets/87ec421a-596c-4a08-8e95-4805dab798d8)
 
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 💡 Using SynthraChat
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+![step 6](https://github.com/user-attachments/assets/3dcaa4ea-8fb8-4b16-9b80-89181030c310)
+
 ⚙ Open the Settings Menu
 Click the ☰ for menu then select SynthraCHAT:
 
@@ -118,7 +119,6 @@ Click the main AI button to begin or stop the chat
 
 Speak naturally—your AI will respond in real time
 
-![step 6](https://github.com/user-attachments/assets/3dcaa4ea-8fb8-4b16-9b80-89181030c310)
 _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 🧑‍🎤 Customize Everything
