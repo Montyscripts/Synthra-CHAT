@@ -28,7 +28,6 @@ from mss import tools as mss_tools
 from typing import Optional, Dict, Callable, Any
 import customtkinter as ctk
 from tkinter import scrolledtext
-import argparse
 
 # SynthraChat imports and config
 from google import genai
@@ -494,7 +493,7 @@ class SynthraChatConfig:
         mode_frame.pack()
         ctk.CTkRadioButton(mode_frame, text="Camera", variable=self.mode_var, value="camera").pack(side=tk.LEFT, padx=5)
         ctk.CTkRadioButton(mode_frame, text="Screen", variable=self.mode_var, value="screen").pack(side=tk.LEFT, padx=5)
-        ctk.CTkRadioButton(mode_frame, text="Audio", variable=self.mode_var, value="audio").pack(side=tk.LEFT, padx=5)
+        ctk.CTkRadioButton(mode_frame, text="Audio Only", variable=self.mode_var, value="audio").pack(side=tk.LEFT, padx=5)
         
         # Voice Selection
         ctk.CTkLabel(self.main_frame, text="Voice:").pack(pady=(10,0))
@@ -737,16 +736,10 @@ def toggle_synthra_chat():
         try:
             # Initialize client and config
             client = genai.Client(
-                http_options={"api_version": "v1beta"},
+                http_options={"api_version": "v1alpha"},
                 api_key=synthra_config['api_key']
             )
             
-            # Add tools configuration
-            tools = [
-                types.Tool(code_execution=types.ToolCodeExecution()),
-                types.Tool(google_search=types.GoogleSearch()),
-            ]
-
             CONFIG = types.LiveConnectConfig(
                 response_modalities=["audio"],
                 speech_config=types.SpeechConfig(
@@ -759,8 +752,7 @@ def toggle_synthra_chat():
                         text=synthra_config['persona']
                     )],
                     role="user"
-                ),
-                tools=tools
+                )
             )
             
             # Start audio loop
@@ -961,17 +953,6 @@ class AudioLoop:
                 async for response in turn:
                     if not self.running:
                         break
-                        
-                    # Handle text responses (code execution/google search results)
-                    if response.text:
-                        self.is_listening = False
-                        if self.update_status:
-                            self.update_status("Processing response...")
-                        # Convert text response to audio input
-                        await self.out_queue.put({
-                            "mime_type": "text/plain",
-                            "data": response.text
-                        })
                         
                     if response.data:
                         self.is_listening = False
