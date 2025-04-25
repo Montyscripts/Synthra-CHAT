@@ -74,7 +74,7 @@ python -m pip install -r requirements.txt
 
 if %errorlevel% NEQ 0 (
     echo Failed installing some packages. Trying manual Pillow install...
-    python -m pip install pillow==10.3.0 --no-binary :all:
+    python -m pip install pillow==9.5.0 --no-binary :all:
     if %errorlevel% NEQ 0 (
         echo ERROR: Pillow install failed.
         pause
@@ -86,7 +86,7 @@ if %errorlevel% NEQ 0 (
 :: Build SynthraCHAT Executable
 :: ===============================
 echo Creating SynthraCHAT executable... Grab a coffee ☕
-pyinstaller @pyinstaller.txt SynthraCHAT.py
+pyinstaller --onefile --noconsole --icon=Icon.png --add-data "Button.mp3;." --add-data "Click.mp3;." --add-data "Hover.mp3;." --add-data "Icon.png;." --add-data "Wallpaper.png;." --add-data "Button.png;." SynthraCHAT.py
 
 :: ===============================
 :: Check if build succeeded
@@ -98,29 +98,11 @@ if not exist "dist\SynthraCHAT.exe" (
 )
 
 :: ===============================
-:: Move executable to scripts folder
-:: ===============================
-echo Moving executable to Python Scripts folder...
-set "scripts_path=%LOCALAPPDATA%\Programs\Python\Python311\Scripts"
-if not exist "%scripts_path%" (
-    set "scripts_path=%APPDATA%\Python\Python311\Scripts"
-)
-if not exist "%scripts_path%" (
-    echo Could not find Python Scripts folder. Executable remains in dist folder.
-) else (
-    move /Y "dist\SynthraCHAT.exe" "%scripts_path%"
-    echo SynthraCHAT.exe installed to: %scripts_path%
-)
-
-:: ===============================
 :: Done!
 :: ===============================
 echo.
 echo ########################################################
 echo #       SynthraCHAT is ready to chat! 🚀              #
-echo #                                                      #
-echo # The executable has been installed to:                #
-echo # %scripts_path%\SynthraCHAT.exe                       #
 echo ########################################################
 pause
 exit /b
