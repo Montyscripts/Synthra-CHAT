@@ -9,3 +9,4 @@ Pillow==9.5.0
 screeninfo
 mss
 pyinstaller
+numpy
