@@ -33,7 +33,6 @@ from tkinter import scrolledtext
 from google import genai
 from google.genai import types
 
-
 # Audio config
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -45,10 +44,11 @@ CHUNK_SIZE = 1024
 MODEL = "models/gemini-2.0-flash-live-001"
 
 # Default settings (will be updated by GUI)
-DEFAULT_MODE = "audio"
+DEFAULT_MODE = "text"
 API_KEY = ""
 DEFAULT_PERSONA = """You are SynthraCHAT, a helpful AI assistant. 
-Respond concisely and helpfully to user requests."""
+Respond concisely and helpfully to user requests. 
+Format responses clearly without markdown or asterisks."""
 DEFAULT_VOICE = "Puck"
 MAX_CONVERSATION_HISTORY = 100000000000000  # Characters
 MAX_QUEUE_SIZE = 10
@@ -76,6 +76,7 @@ synthra_running = False
 synthra_audio_loop = None
 synthra_audio_loop_thread = None
 synthra_event_loop = None
+text_mode_window = None
 
 # Indicator settings
 indicator_colors = {
@@ -201,7 +202,7 @@ def speak_text(text):
 
 def on_close():
     """Gracefully exit the application"""
-    global stop_listening, synthra_running, synthra_audio_loop, synthra_event_loop
+    global stop_listening, synthra_running, synthra_audio_loop, synthra_event_loop, text_mode_window
     
     try:
         if stop_listening:
@@ -214,6 +215,9 @@ def on_close():
                 synthra_event_loop.stop()
             if synthra_audio_loop_thread:
                 synthra_audio_loop_thread.join(timeout=1)
+        
+        if text_mode_window:
+            text_mode_window.destroy()
             
         engine.stop()
         pygame.mixer.quit()
@@ -469,7 +473,7 @@ def close_menu_if_open(event):
 class SynthraChatConfig:
     def __init__(self, parent):
         self.parent = parent
-        self.window = tk.Toplevel(parent)
+        self.window = ctk.CTkToplevel(parent)
         self.window.title("SynthraCHAT Configuration")
         self.window.geometry('1000x700')
         center_window_on_parent(self.window, 1000, 700)
@@ -487,13 +491,14 @@ class SynthraChatConfig:
         self.main_frame.pack(pady=20, padx=20, fill="both", expand=True)
         
         # Mode Selection
-        ctk.CTkLabel(self.main_frame, text="Input Mode:").pack(pady=(10,0))
+        ctk.CTkLabel(self.main_frame, text="Input Mode:").pack()
         self.mode_var = ctk.StringVar(value=DEFAULT_MODE)
         mode_frame = ctk.CTkFrame(self.main_frame)
         mode_frame.pack()
         ctk.CTkRadioButton(mode_frame, text="Camera", variable=self.mode_var, value="camera").pack(side=tk.LEFT, padx=5)
         ctk.CTkRadioButton(mode_frame, text="Screen", variable=self.mode_var, value="screen").pack(side=tk.LEFT, padx=5)
         ctk.CTkRadioButton(mode_frame, text="Audio Only", variable=self.mode_var, value="audio").pack(side=tk.LEFT, padx=5)
+        ctk.CTkRadioButton(mode_frame, text="Text Only", variable=self.mode_var, value="text").pack(side=tk.LEFT, padx=5)
         
         # Voice Selection
         ctk.CTkLabel(self.main_frame, text="Voice:").pack(pady=(10,0))
@@ -503,13 +508,24 @@ class SynthraChatConfig:
         voices = ["Puck", "Charon", "Kore", "Fenrir", "Aoede", "Leda", "Orus", "Zephyr"]
         for voice in voices:
             ctk.CTkRadioButton(voice_frame, text=voice, variable=self.voice_var, value=voice).pack(side=tk.LEFT, padx=5)
+
+        # Tools Configuration
+        ctk.CTkLabel(self.main_frame, text="AI Capabilities:").pack(pady=(10,0))
+        self.tools_frame = ctk.CTkFrame(self.main_frame)
+        self.tools_frame.pack()
         
+        self.google_search_var = ctk.BooleanVar(value=False)
+        self.code_execution_var = ctk.BooleanVar(value=False)
+        
+        ctk.CTkCheckBox(self.tools_frame, text="Google Search", variable=self.google_search_var).pack(side=tk.LEFT, padx=5)
+        ctk.CTkCheckBox(self.tools_frame, text="Code Execution", variable=self.code_execution_var).pack(side=tk.LEFT, padx=5)
+
         # Persona Configuration
         ctk.CTkLabel(self.main_frame, text="Persona Configuration:").pack(pady=(10,0))
         self.persona_text = ctk.CTkTextbox(self.main_frame, width=600, height=200, wrap=tk.WORD)
         self.persona_text.insert(tk.INSERT, DEFAULT_PERSONA)
         self.persona_text.pack(pady=(0,10))
-        
+
         # API Key section
         ctk.CTkLabel(self.main_frame, text="Google Gemini API Key:").pack(pady=(10,0))
         
@@ -538,8 +554,8 @@ class SynthraChatConfig:
         
         # Config dropdown and buttons
         config_controls = ctk.CTkFrame(self.main_frame, fg_color="transparent")
-        config_controls.pack()
-        
+        config_controls.pack(pady=(1, 0))
+
         self.saved_config_var = ctk.StringVar()
         self.saved_config_dropdown = ctk.CTkComboBox(
             config_controls, 
@@ -623,6 +639,8 @@ class SynthraChatConfig:
             self.voice_var.set(config.get('voice', DEFAULT_VOICE))
             self.api_key_entry.delete(0, tk.END)
             self.api_key_entry.insert(0, config.get('api_key', ""))
+            self.google_search_var.set(config.get('google_search', False))
+            self.code_execution_var.set(config.get('code_execution', False))
     
     def save_current_config(self):
         """Save current configuration with a name"""
@@ -644,7 +662,9 @@ class SynthraChatConfig:
                     'api_key': self.api_key_entry.get(),
                     'mode': self.mode_var.get(),
                     'voice': self.voice_var.get(),
-                    'persona': self.persona_text.get("1.0", tk.END).strip()
+                    'persona': self.persona_text.get("1.0", tk.END).strip(),
+                    'google_search': self.google_search_var.get(),
+                    'code_execution': self.code_execution_var.get()
                 }
                 self.save_configs_to_file()
                 # Update dropdown with only the named configurations
@@ -682,7 +702,9 @@ class SynthraChatConfig:
             'api_key': API_KEY,
             'mode': DEFAULT_MODE,
             'voice': DEFAULT_VOICE,
-            'persona': DEFAULT_PERSONA
+            'persona': DEFAULT_PERSONA,
+            'google_search': self.google_search_var.get(),
+            'code_execution': self.code_execution_var.get()
         }
         
         self.window.destroy()
@@ -701,10 +723,9 @@ class SynthraChatConfig:
         """Handle window close event"""
         self.window.destroy()
 
-def show_synthra_chat():
-    """Show SynthraCHAT configuration window"""
-    play_sound("menu")
-    SynthraChatConfig(root)
+# Global variables to track open windows
+synthra_config_window = None
+text_mode_window = None
 
 def run_synthra_loop():
     """Run the SynthraCHAT audio loop in a separate thread"""
@@ -713,6 +734,7 @@ def run_synthra_loop():
     try:
         synthra_event_loop = asyncio.new_event_loop()
         asyncio.set_event_loop(synthra_event_loop)
+        synthra_audio_loop.loop = synthra_event_loop  # Set the loop reference
         synthra_event_loop.run_until_complete(synthra_audio_loop.run())
     except Exception as e:
         print(f"Error in SynthraCHAT loop: {e}")
@@ -721,9 +743,141 @@ def run_synthra_loop():
         if synthra_audio_loop:
             synthra_audio_loop.cleanup()
 
+def show_synthra_chat():
+    """Show SynthraCHAT configuration window"""
+    global synthra_config_window
+    
+    play_sound("menu")
+    
+    # Check if config window already exists
+    if synthra_config_window is not None and synthra_config_window.window.winfo_exists():
+        synthra_config_window.window.lift()  # Bring to front if already open
+        return
+        
+    # Create new config window
+    synthra_config_window = SynthraChatConfig(root)
+    synthra_config_window.window.attributes('-topmost', True)  # Make it stay on top
+    synthra_config_window.window.after(100, lambda: synthra_config_window.window.attributes('-topmost', False))  # Then allow it to go behind
+
+def create_text_mode_interface():
+    """Create the text mode interface window"""
+    global text_mode_window, synthra_running, synthra_config_window
+    
+    if not synthra_running:
+        return
+    
+    # Check if text mode window already exists
+    if text_mode_window is not None and text_mode_window.winfo_exists():
+        text_mode_window.lift()  # Bring to front if already open
+        return
+    
+    # Close config window if open
+    if synthra_config_window is not None and synthra_config_window.window.winfo_exists():
+        synthra_config_window.window.destroy()
+        synthra_config_window = None
+    
+    text_mode_window = ctk.CTkToplevel(root)
+    text_mode_window.title("SynthraCHAT - Text Mode")
+    text_mode_window.geometry('800x600')
+    center_window_on_parent(text_mode_window, 800, 600)
+    text_mode_window.attributes('-topmost', True)  # Make it stay on top
+    text_mode_window.after(100, lambda: text_mode_window.attributes('-topmost', False))  # Then allow it to go behind
+    
+    # Status indicator
+    status_label = ctk.CTkLabel(
+        text_mode_window, 
+        text="Ready for text input",
+        font=("Arial", 14)
+    )
+    status_label.pack(pady=(10, 20))
+    
+    # Conversation display
+    conversation_text = scrolledtext.ScrolledText(
+        text_mode_window,
+        wrap=tk.WORD,
+        width=80,
+        height=20,
+        font=('Arial', 12),
+        bg='#242424',
+        fg='white',
+        insertbackground='white'
+    )
+    conversation_text.pack(pady=(0,10), padx=10, fill="both", expand=True)
+    conversation_text.configure(state='disabled')
+    
+    # User input frame
+    user_input_frame = ctk.CTkFrame(text_mode_window)
+    user_input_frame.pack(fill="x", padx=10, pady=5)
+    
+    # Changed from CTkEntry to CTkTextbox for multi-line input
+    user_input_textbox = ctk.CTkTextbox(
+        user_input_frame,
+        height=80,  # Makes the box taller
+        wrap="word",  # Ensures text wraps properly
+        font=("Arial", 12),
+    )
+    user_input_textbox.pack(side=tk.LEFT, fill="both", expand=True, padx=(0,5))
+    
+    def send_user_message():
+        message = user_input_textbox.get("1.0", tk.END).strip()  # Get all text
+        if message:
+            # Add user message to conversation
+            conversation_text.configure(state='normal')
+            conversation_text.insert(tk.END, f"You: {message}\nAI: ")
+            conversation_text.configure(state='disabled')
+            conversation_text.see(tk.END)
+            
+            user_input_textbox.delete("1.0", tk.END)  # Clear the textbox
+            
+            if hasattr(synthra_audio_loop, 'out_queue'):
+                asyncio.run_coroutine_threadsafe(
+                    synthra_audio_loop.out_queue.put({
+                        "mime_type": "text/plain",
+                        "data": message
+                    }),
+                    synthra_audio_loop.loop
+                )
+            status_label.configure(text="AI is responding...")
+    
+    send_button = ctk.CTkButton(
+    user_input_frame, 
+    text="Send", 
+    width=100,  # Increased width
+    height=80,  # Matches textbox height
+    font=("Arial", 14),  # Optional: Larger font
+    command=send_user_message
+    )
+    send_button.pack(side=tk.RIGHT, padx=(5,0))  # Added small left padding
+    
+    # Handle Enter key (send message) and Shift+Enter (new line)
+    def handle_keypress(event):
+        if event.keysym == "Return" and not event.state & 0x1:  # Normal Enter (not Shift+Enter)
+            send_user_message()
+            return "break"  # Prevents default newline behavior
+    user_input_textbox.bind("<KeyPress>", handle_keypress)
+    
+    def on_text_window_close():
+        global text_mode_window
+        if text_mode_window and text_mode_window.winfo_exists():
+            text_mode_window.destroy()
+        text_mode_window = None
+    
+    text_mode_window.protocol("WM_DELETE_WINDOW", on_text_window_close)
+    
+    def process_text_response(text):
+        conversation_text.configure(state='normal')
+        conversation_text.insert(tk.END, text)
+        conversation_text.configure(state='disabled')
+        conversation_text.see(tk.END)
+        status_label.configure(text="Ready for text input")
+    
+    # Update the audio loop with the text response callback
+    if synthra_audio_loop:
+        synthra_audio_loop.update_conversation = process_text_response
+
 def toggle_synthra_chat():
     """Toggle SynthraCHAT on/off"""
-    global synthra_running, synthra_audio_loop, synthra_audio_loop_thread, synthra_config, client, CONFIG
+    global synthra_running, synthra_audio_loop, synthra_audio_loop_thread, synthra_config, client, CONFIG, text_mode_window, synthra_config_window
     
     play_sound("main")  # Added sound when button is clicked
     
@@ -740,20 +894,40 @@ def toggle_synthra_chat():
                 api_key=synthra_config['api_key']
             )
             
-            CONFIG = types.LiveConnectConfig(
-                response_modalities=["audio"],
-                speech_config=types.SpeechConfig(
-                    voice_config=types.VoiceConfig(
-                        prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=synthra_config['voice'])
-                    )
-                ),
-                system_instruction=types.Content(
-                    parts=[types.Part.from_text(
-                        text=synthra_config['persona']
-                    )],
-                    role="user"
+            # Configure tools based on user selection
+            tools = []
+            if synthra_config.get('google_search', False):
+                tools.append(types.Tool(google_search=types.GoogleSearch()))
+            if synthra_config.get('code_execution', False):
+                tools.append(types.Tool(code_execution=types.ToolCodeExecution()))
+            
+            if synthra_config['mode'] == "text":
+                CONFIG = types.LiveConnectConfig(
+                    response_modalities=["text"],
+                    system_instruction=types.Content(
+                        parts=[types.Part.from_text(
+                            text=synthra_config['persona']
+                        )],
+                        role="user"
+                    ),
+                    tools=tools if tools else None
                 )
-            )
+            else:
+                CONFIG = types.LiveConnectConfig(
+                    response_modalities=["audio"],
+                    speech_config=types.SpeechConfig(
+                        voice_config=types.VoiceConfig(
+                            prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=synthra_config['voice'])
+                        )
+                    ),
+                    system_instruction=types.Content(
+                        parts=[types.Part.from_text(
+                            text=synthra_config['persona']
+                        )],
+                        role="user"
+                    ),
+                    tools=tools if tools else None
+                )
             
             # Start audio loop
             synthra_audio_loop = AudioLoop(
@@ -770,6 +944,10 @@ def toggle_synthra_chat():
             synthra_audio_loop_thread.start()
             update_listening_indicators()
             
+            # If in text mode, create the text interface
+            if synthra_config['mode'] == "text":
+                create_text_mode_interface()
+            
         except Exception as e:
             synthra_running = False
             update_listening_indicators()
@@ -783,6 +961,10 @@ def toggle_synthra_chat():
             synthra_audio_loop.stop()
             if synthra_audio_loop_thread:
                 synthra_audio_loop_thread.join(timeout=1)
+        
+        if text_mode_window and text_mode_window.winfo_exists():
+            text_mode_window.destroy()
+            text_mode_window = None
         
         synthra_audio_loop = None
         synthra_audio_loop_thread = None
@@ -905,8 +1087,11 @@ class AudioLoop:
         while self.running:
             try:
                 msg = await asyncio.wait_for(self.out_queue.get(), timeout=1.0)
-                await self.session.send(input=msg)
-                if self.update_status:
+                if self.video_mode == "text":
+                    await self.session.send(input=msg["data"], end_of_turn=True)
+                else:
+                    await self.session.send(input=msg)
+                if self.update_status and self.video_mode != "text":
                     self.update_status("AI is processing...")
             except asyncio.TimeoutError:
                 continue
@@ -917,6 +1102,9 @@ class AudioLoop:
 
     async def listen_audio(self):
         """Capture audio from microphone"""
+        if self.video_mode == "text":
+            return
+            
         try:
             mic_info = pya.get_default_input_device_info()
             self.audio_stream = await asyncio.to_thread(
@@ -954,18 +1142,20 @@ class AudioLoop:
                     if not self.running:
                         break
                         
-                    if response.data:
+                    if response.data and self.video_mode != "text":
                         self.is_listening = False
                         if self.update_status:
                             self.update_status("AI is responding...")
                         self.audio_in_queue.put_nowait(response.data)
                         continue
+                    if response.text and self.update_conversation and self.video_mode == "text":
+                        self.update_conversation(response.text)
 
                 # Clear any remaining audio in queue
                 while not self.audio_in_queue.empty():
                     self.audio_in_queue.get_nowait()
 
-                self.is_listening = True
+                self.is_listening = True if self.video_mode != "text" else False
                 
             except Exception as e:
                 if self.update_status:
@@ -975,6 +1165,9 @@ class AudioLoop:
 
     async def play_audio(self):
         """Play received audio responses"""
+        if self.video_mode == "text":
+            return
+            
         try:
             stream = await asyncio.to_thread(
                 pya.open,
@@ -1011,9 +1204,11 @@ class AudioLoop:
                 tasks = [
                     tg.create_task(self.send_realtime()),
                     tg.create_task(self.receive_audio()),
-                    tg.create_task(self.listen_audio()),
-                    tg.create_task(self.play_audio()),
                 ]
+
+                if self.video_mode != "text":
+                    tasks.append(tg.create_task(self.listen_audio()))
+                    tasks.append(tg.create_task(self.play_audio()))
 
                 if self.video_mode == "camera":
                     tasks.append(tg.create_task(self.get_frames()))
