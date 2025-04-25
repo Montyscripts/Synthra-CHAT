@@ -22,55 +22,77 @@ echo.
 timeout /t 2 >nul
 
 :: ===============================
-:: Check Python installation
+:: Auto-run as administrator
+:: ===============================
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+if '%errorlevel%' NEQ '0' (
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    echo UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0", "", "runas", 1 >> "%temp%\getadmin.vbs"
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    exit /b
+)
+
+echo ########################################################
+echo #           SynthraCHAT Automatic Installer            #
+echo # This will automatically:                            #
+echo # 1. Install all required packages                     #
+echo # 2. Create the SynthraCHAT executable                 #
+echo #                                                      #
+echo # Please wait while the installer runs...              #
+echo ########################################################
+
+:: ===============================
+:: Check internet connection
+:: ===============================
+echo Checking internet connection...
+ping -n 2 google.com >nul
+if errorlevel 1 (
+    echo Error: No internet connection detected.
+    pause
+    exit /b 1
+)
+
+:: ===============================
+:: Check for Python installation
 :: ===============================
 where python >nul 2>&1
 if errorlevel 1 (
-    echo Error: Python is not installed. Get it here:
+    echo Error: Python is not installed. Please install Python from:
     echo https://www.python.org/downloads/
     pause
     exit /b 1
 )
 
 :: ===============================
-:: Install Python dependencies
+:: Upgrade pip and install packages
 :: ===============================
 echo Installing dependencies...
 python -m pip install --upgrade pip setuptools wheel
+python -m pip install pyinstaller
 python -m pip install -r requirements.txt
 
 if %errorlevel% NEQ 0 (
-    echo ❌ Dependency installation failed!
-    pause
-    exit /b 1
+    echo Failed installing some packages. Trying manual Pillow install...
+    python -m pip install pillow==9.5.0 --no-binary :all:
+    if %errorlevel% NEQ 0 (
+        echo ERROR: Pillow install failed.
+        pause
+        exit /b 1
+    )
 )
 
 :: ===============================
 :: Build SynthraCHAT Executable
 :: ===============================
-echo.
-echo ☕ Creating SynthraCHAT.exe... hold your brew...
-python -m PyInstaller --onefile --noconsole ^
---icon=Icon.png ^
---add-data "Button.mp3;." ^
---add-data "Click.mp3;." ^
---add-data "Hover.mp3;." ^
---add-data "Button.png;." ^
---add-data "Wallpaper.png;." ^
---add-data "Icon.png;." ^
---hidden-import=pyaudio ^
---hidden-import=customtkinter ^
---hidden-import=cv2 ^
---hidden-import=PIL ^
---hidden-import=mss ^
---hidden-import=google ^
-SynthraCHAT.py
+echo Creating SynthraCHAT executable... Grab a coffee ☕
+pyinstaller --onefile --noconsole --icon=Icon.png --add-data "Button.mp3;." --add-data "Click.mp3;." --add-data "Hover.mp3;." --add-data "Icon.png;." --add-data "Wallpaper.png;." --add-data "Button.png;." SynthraCHAT.py
 
 :: ===============================
 :: Check if build succeeded
 :: ===============================
 if not exist "dist\SynthraCHAT.exe" (
-    echo ❌ ERROR: Executable build failed.
+    echo ERROR: Executable creation failed.
     pause
     exit /b 1
 )
@@ -79,9 +101,8 @@ if not exist "dist\SynthraCHAT.exe" (
 :: Done!
 :: ===============================
 echo.
-echo ☕ ###################################################
-echo ☕   SynthraCHAT is ready to caffeinate your chats!  🚀
-echo ☕   Find the .exe in the /dist folder — cheers!      ☕
-echo ☕ ###################################################
+echo ########################################################
+echo #       SynthraCHAT is ready to chat! 🚀              #
+echo ########################################################
 pause
 exit /b
