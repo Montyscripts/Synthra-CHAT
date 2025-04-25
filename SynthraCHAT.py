@@ -248,7 +248,9 @@ def show_rules():
                               "Features:\n"
                               "• Natural voice conversations\n"
                               "• Screen/Camera/Audio mode\n"
-                              "• 8 unique AI voices\n\n"
+                              "• 8 unique AI voices\n"
+                              "• Google Search grounding\n"
+                              "• Code execution capabilities\n\n"
                               "SynthraChat | Created by Caleb W. Broussard",
                          font=("Helvetica", 12),
                          wraplength=380,
@@ -471,8 +473,8 @@ class SynthraChatConfig:
         self.parent = parent
         self.window = tk.Toplevel(parent)
         self.window.title("SynthraCHAT Configuration")
-        self.window.geometry('1000x700')
-        center_window_on_parent(self.window, 1000, 700)
+        self.window.geometry('1000x720')
+        center_window_on_parent(self.window, 1000, 720)
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)
         
         self.saved_configs = self.load_saved_configs()
@@ -484,7 +486,7 @@ class SynthraChatConfig:
         
         # Create main frame with grid layout
         self.main_frame = ctk.CTkFrame(self.window)
-        self.main_frame.pack(pady=20, padx=20, fill="both", expand=True)
+        self.main_frame.pack(pady=10, padx=10, fill="both", expand=True)
         
         # Mode Selection
         ctk.CTkLabel(self.main_frame, text="Input Mode:").pack(pady=(10,0))
@@ -504,6 +506,22 @@ class SynthraChatConfig:
         for voice in voices:
             ctk.CTkRadioButton(voice_frame, text=voice, variable=self.voice_var, value=voice).pack(side=tk.LEFT, padx=5)
         
+        # Tools Configuration - MODIFY THIS SECTION
+        ctk.CTkLabel(self.main_frame, text="AI Tools:").pack(pady=(10,0))
+        self.tools_frame = ctk.CTkFrame(self.main_frame)
+        self.tools_frame.pack()
+
+        self.google_search_var = ctk.BooleanVar(value=True)
+        self.code_execution_var = ctk.BooleanVar(value=True)
+
+        # Create a sub-frame for horizontal layout
+        tools_checkbox_frame = ctk.CTkFrame(self.tools_frame, fg_color="transparent")
+        tools_checkbox_frame.pack()
+
+        # Place checkboxes side by side with padding
+        ctk.CTkCheckBox(tools_checkbox_frame, text="Google Search", variable=self.google_search_var).pack(side=tk.LEFT, padx=10, pady=2)
+        ctk.CTkCheckBox(tools_checkbox_frame, text="Code Execution", variable=self.code_execution_var).pack(side=tk.LEFT, padx=10, pady=2)
+
         # Persona Configuration
         ctk.CTkLabel(self.main_frame, text="Persona Configuration:").pack(pady=(10,0))
         self.persona_text = ctk.CTkTextbox(self.main_frame, width=600, height=200, wrap=tk.WORD)
@@ -599,7 +617,7 @@ class SynthraChatConfig:
                     # Filter out any non-dictionary entries or improperly formatted configs
                     return {name: config for name, config in loaded_configs.items() 
                            if isinstance(config, dict) and 
-                           all(key in config for key in ['api_key', 'mode', 'voice', 'persona'])}
+                           all(key in config for key in ['api_key', 'mode', 'voice', 'persona', 'tools'])}
         except Exception as e:
             print(f"Error loading saved configs: {e}")
         return {}
@@ -623,6 +641,11 @@ class SynthraChatConfig:
             self.voice_var.set(config.get('voice', DEFAULT_VOICE))
             self.api_key_entry.delete(0, tk.END)
             self.api_key_entry.insert(0, config.get('api_key', ""))
+            
+            # Load tools configuration
+            tools_config = config.get('tools', {})
+            self.google_search_var.set(tools_config.get('google_search', True))
+            self.code_execution_var.set(tools_config.get('code_execution', True))
     
     def save_current_config(self):
         """Save current configuration with a name"""
@@ -644,7 +667,11 @@ class SynthraChatConfig:
                     'api_key': self.api_key_entry.get(),
                     'mode': self.mode_var.get(),
                     'voice': self.voice_var.get(),
-                    'persona': self.persona_text.get("1.0", tk.END).strip()
+                    'persona': self.persona_text.get("1.0", tk.END).strip(),
+                    'tools': {
+                        'google_search': self.google_search_var.get(),
+                        'code_execution': self.code_execution_var.get()
+                    }
                 }
                 self.save_configs_to_file()
                 # Update dropdown with only the named configurations
@@ -682,7 +709,11 @@ class SynthraChatConfig:
             'api_key': API_KEY,
             'mode': DEFAULT_MODE,
             'voice': DEFAULT_VOICE,
-            'persona': DEFAULT_PERSONA
+            'persona': DEFAULT_PERSONA,
+            'tools': {
+                'google_search': self.google_search_var.get(),
+                'code_execution': self.code_execution_var.get()
+            }
         }
         
         self.window.destroy()
@@ -736,9 +767,16 @@ def toggle_synthra_chat():
         try:
             # Initialize client and config
             client = genai.Client(
-                http_options={"api_version": "v1alpha"},
+                http_options={"api_version": "v1beta"},
                 api_key=synthra_config['api_key']
             )
+            
+            # Prepare tools based on configuration
+            tools = []
+            if synthra_config['tools']['google_search']:
+                tools.append(types.Tool(google_search=types.GoogleSearch()))
+            if synthra_config['tools']['code_execution']:
+                tools.append(types.Tool(code_execution=types.ToolCodeExecution()))
             
             CONFIG = types.LiveConnectConfig(
                 response_modalities=["audio"],
@@ -752,7 +790,8 @@ def toggle_synthra_chat():
                         text=synthra_config['persona']
                     )],
                     role="user"
-                )
+                ),
+                tools=tools if tools else None
             )
             
             # Start audio loop
